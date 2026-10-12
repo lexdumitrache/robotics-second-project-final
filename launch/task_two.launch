@@ -7,6 +7,8 @@ kobuki_hexagons_kinect kobuki_hexagons_r200 roomba_circles_asus_xtion_pro roomba
   <arg name="map_file"       default="$(find second_project)/maps/slam_map.yaml"/> 
   <arg name="world_file"     default="$(find second_project)/world/stage.world"/>
   <arg name="scan_topic" default="base_scan"/>
+  <!-- x,y,theta per line, in the map frame -->
+  <arg name="waypoints" default="$(find second_project)/cfg/waypoints.csv"/>
   <param name="/use_sim_time" value="true"/>
 
 
@@ -32,15 +34,6 @@ kobuki_hexagons_kinect kobuki_hexagons_r200 roomba_circles_asus_xtion_pro roomba
     <rosparam file="$(find second_project)/cfg/dwa_local_planner_params.yaml" command="load" />
     <rosparam file="$(find second_project)/cfg/move_base_params.yaml" command="load" /> 
 
-    <param name="base_global_planner" value="navfn/NavfnROS" /> 
-    <param name="planner_frequency" value="1.0" />
-    <param name="planner_patience" value="5.0" /> 
-
-    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
-    <param name="controller_frequency" value="5.0" />
-    <param name="controller_patience" value="5.0" />
-
-    <param name="clearing_rotation_allowed" value="true"/> 
   </node>
 
   <include file="$(find second_project)/launch/amcl.launch">
@@ -49,7 +42,7 @@ kobuki_hexagons_kinect kobuki_hexagons_r200 roomba_circles_asus_xtion_pro roomba
   </include>
 
   <node pkg="second_project" name="goal_publisher" type="goal_publisher" output="screen">
-    <param name="csv_file" value="$(find second_project)/bags/waypoints.csv" />
+    <param name="csv_file" value="$(arg waypoints)" />
   </node>
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find second_project)/rviz/robot_navigation.rviz"/>

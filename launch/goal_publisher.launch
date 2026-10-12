@@ -1,7 +1,8 @@
 <launch>
+ <arg name="waypoints" default="$(find second_project)/cfg/waypoints.csv"/>
  
  <node pkg="second_project" name="goal_publisher" type="goal_publisher" output="screen">
-  <param name="csv_file" value="$(find second_project)/bags/waypoints.csv" />
+  <param name="csv_file" value="$(arg waypoints)" />
  </node>
 
 </launch>

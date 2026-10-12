@@ -1,0 +1,16 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ros:noetic-ros-base
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ws/src/second_project
+      - name: Build and test
+        shell: bash
+        run: |
+          apt-get update && rosdep update --rosdistro noetic && cd ws && rosdep install --from-paths src --ignore-src -y -t buildtool -t build -t test
+          source /opt/ros/noetic/setup.bash
+          catkin_make && catkin_make run_tests && catkin_test_results
