@@ -5,7 +5,7 @@
   <description>Mapping from a recorded bag and Stage/move_base navigation of an AgileX Scout Mini (Politecnico di Milano Robotics, second project)</description>
 
   <maintainer email="alexandradumitrachee@gmail.com">Alexandra Dumitrache</maintainer>
-  <license>MIT</license>
+  <license>Unlicensed</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>actionlib</depend>
