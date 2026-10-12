@@ -1,27 +1,30 @@
 DWAPlannerROS:
 
-# Robot Configuration Parameters - Four-Wheel Independent Movement System
-  max_vel_x: 3.0  # TO DO: Specify the maximum x velocity for your robot
-  min_vel_x: -3.0  # TO DO: Specify the minimum x velocity for your robot
+# Robot Configuration Parameters
+# Simulated as a differential drive (world/models/scout_mini.inc: drive "diff", amcl: diff-corrected),
+# so no lateral velocity. Speeds are kept well below the Scout Mini's 3 m/s for indoor navigation.
+  max_vel_x: 0.4
+  min_vel_x: -0.1
 
-  max_vel_y: 3.0  # TO DO: Specify the maximum y velocity for your robot
-  min_vel_y: -3.0  # TO DO: Specify the minimum y velocity for your robot
+  max_vel_y: 0.0
+  min_vel_y: 0.0
 
-  max_trans_vel: 0.4  # Choose slightly less than the base's capability
-  min_trans_vel: 0.1  # This is the min trans velocity when there is negligible rotational velocity
+  max_vel_trans: 0.4  # Choose slightly less than the base's capability
+  min_vel_trans: 0.1  # This is the min trans velocity when there is negligible rotational velocity
   trans_stopped_vel: 0.1
 
   # Warning!
-  #   Do not set min_trans_vel to 0.0 otherwise DWA will always think translational velocities
+  #   Do not set min_vel_trans to 0.0 otherwise DWA will always think translational velocities
   #   are non-negligible and small in place rotational velocities will be created.
 
-  max_rot_vel: 3.0  # Choose slightly less than the base's capability
-  min_rot_vel: 0.4  # This is the min angular velocity when there is negligible translational velocity
-  rot_stopped_vel: 0.4
-  
+  max_vel_theta: 1.0  # rad/s
+  min_vel_theta: 0.4  # This is the min angular velocity when there is negligible translational velocity
+  theta_stopped_vel: 0.1
+
   acc_lim_x: 0.5  # Maximum is theoretically higher, but we don't want to crash/do strange stuff/overshoot
   acc_lim_theta: 1.0  # rad
-  acc_lim_y: 0.5  # TO DO: Specify the appropriate acceleration limit for the y-axis
+  acc_lim_y: 0.0
+  holonomic_robot: false
 
 # Goal Tolerance Parameters
   yaw_goal_tolerance: 0.3  # 0.05
@@ -30,7 +33,7 @@ DWAPlannerROS:
 # Forward Simulation Parameters
   sim_time: 2.0  # 1.7 The amount of time to forward-simulate trajectories in seconds
   vx_samples: 3  # 3 The number of samples to use when exploring the x velocity space
-  vy_samples: 3  # TO DO: Specify the number of samples for y velocity space
+  vy_samples: 1  # no lateral motion
   vtheta_samples: 20  # 20
 
 # Trajectory Scoring Parameters

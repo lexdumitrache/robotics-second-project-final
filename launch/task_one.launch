@@ -1,4 +1,6 @@
 <launch>
+    <!-- Course bag (not committed). Default: <package>/bags/robotics2.bag; override with bag:=/path/to/robotics2.bag -->
+    <arg name="bag" default="$(find second_project)/bags/robotics2.bag"/>
     <param name="/use_sim_time" value="true"/>
 
     <node pkg="tf" type="static_transform_publisher" name="rslidar" args="0 0 0 0 0 0 /base_link /rslidar 10" />
@@ -14,7 +16,7 @@
 
     <!-- Node to play the rosbag file -->
     
-    <node pkg="rosbag" type="play" name="rosbag_play" output="screen" args="--clock $(find second_project)/bags/robotics2.bag"/>
+    <node pkg="rosbag" type="play" name="rosbag_play" output="screen" args="--clock $(arg bag)"/>
     
     <node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox" output="screen">
         <rosparam command="load" file="$(find second_project)/cfg/slam.yaml" />
