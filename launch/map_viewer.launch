@@ -1,0 +1,7 @@
+<launch>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find second_project)/maps/slam_map.yaml">
+    <param name="frame_id" value="map"/>
+    </node>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find second_project)/rviz/map_viewer.rviz"/>
+</launch>

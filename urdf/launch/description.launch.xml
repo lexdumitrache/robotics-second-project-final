@@ -1,0 +1,20 @@
+<launch>
+  <!-- Argument for the robot model file -->
+  <arg name="model" default="scout_mini"/>
+
+  <!-- Load the URDF/Xacro file -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find second_project)/urdf/$(arg model).urdf.xacro'" />
+
+  <!-- Publish the robot state -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <param name="publish_frequency" type="double" value="50.0"/>
+    <param name="tf_prefix" value=""/>
+    <param name="use_tf_static" value="true"/>
+    <param name="use_sim_time" value="true"/>
+  </node>
+
+  <!-- Publish joint states -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false" output="screen">
+    <param name="use_gui" value="false"/>
+  </node>
+</launch>

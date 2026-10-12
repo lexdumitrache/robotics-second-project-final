@@ -1,0 +1,25 @@
+<launch>
+    <param name="/use_sim_time" value="true"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="rslidar" args="0 0 0 0 0 0 /base_link /rslidar 10" />
+
+    <node name="odom_to_tf" pkg="second_project" type="odom_to_tf" output="screen" />
+
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan_node">
+        <param name="target_frame" value="rslidar" />
+        <param name="angle_min" value="-2.0944" /> <!-- Example: Adjust to sensor specifications -->
+        <param name="angle_max" value="2.0944" />
+        <remap from="cloud_in" to="/ugv/rslidar_points" />
+    </node>
+
+    <!-- Node to play the rosbag file -->
+    
+    <node pkg="rosbag" type="play" name="rosbag_play" output="screen" args="--clock $(find second_project)/bags/robotics2.bag"/>
+    
+    <node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox" output="screen">
+        <rosparam command="load" file="$(find second_project)/cfg/slam.yaml" />
+    </node>
+
+    <!-- Node to launch RViz with specific configuration -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find second_project)/rviz/mapping.rviz" />
+</launch>

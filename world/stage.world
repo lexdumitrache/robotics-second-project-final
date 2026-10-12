@@ -1,0 +1,25 @@
+include "models/map.inc"
+include "models/scout_mini.inc"
+
+# configure the GUI window
+window
+( 
+	size [700.000 700.000] 
+	scale 0.05
+)
+
+
+# load an environment bitmap
+floorplan
+(
+	bitmap "../maps/slam_map.png" 
+	# Width and hight in meters, already to stale with the map, res = 5 cm/px
+	size [31.25 18.20 3]
+)
+
+scout_mini
+(
+  pose [ 0 0 0 0]
+  name "scout_mini"
+  color "black"
+)

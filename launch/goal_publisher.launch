@@ -1,0 +1,7 @@
+<launch>
+ 
+ <node pkg="second_project" name="goal_publisher" type="goal_publisher" output="screen">
+  <param name="csv_file" value="$(find second_project)/bags/waypoints.csv" />
+ </node>
+
+</launch>
