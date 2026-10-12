@@ -83,3 +83,9 @@ catkin_make run_tests && catkin_test_results   # waypoint CSV parser
   `/use_sim_time` must be true before nodes start.
 - *Robot does not move in Task 2*: check `rostopic echo /move_base/status` and that AMCL has
   converged (set an initial pose in RViz if the particle cloud is spread).
+
+## Academic project and licensing
+
+This repository contains coursework developed for the Robotics course at Politecnico di Milano and is shared for educational and portfolio purposes, subject to applicable course and contributor permissions.
+
+Original contributors should be acknowledged, and third-party components remain subject to their respective licenses. No open-source license is currently granted for the original project code; permission is required before copying, modifying, or redistributing it.
